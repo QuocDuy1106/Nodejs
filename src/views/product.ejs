@@ -1,0 +1,81 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th style="width: 50px;">STT</th>
+            <th style="width: 200px;">Tên sản phẩm</th>    
+            <th style="width: 150px;">Hình ảnh</th>
+            <th style="width: 150px;">Giá</th>
+            <th style="width: 100px;">Tác vụ</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% if (data.products && data.products.length > 0) { %>
+            <% for (let i = 0; i < data.products.length; i++) { %>
+                <tr>
+                    <th scope="row"><%= i + 1 %></th>
+                    <td><%= data.products[i].ten %></td>
+                    <td>
+                        <!-- Hiển thị hình ảnh sản phẩm -->
+                        <img src="/uploads/<%= data.products[i].hinhanh %>">
+                    </td>                    
+                    <td><%= data.products[i].gia %></td>
+                    <!-- <td><%= data.products[i].mota %></td> -->
+                    <td>
+                        <!-- Xem chi tiết sản phẩm -->
+                        <a href="/detail-product/<%= data.products[i].masp %>">
+                            <span class="setting" style="color: blue; padding-right: 10px;">
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+                            </span>
+                        </a>
+
+                        <!-- Chỉnh sửa sản phẩm -->
+                        <a href="/edit-product/<%= data.products[i].masp %>">
+                            <span class="setting" style="color: blue; padding-right: 10px;">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            </span>
+                        </a>
+
+                        <!-- Xóa sản phẩm -->
+                        <form action="/delete-product" method="post" class="del" onsubmit="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?');">
+                            <input type="hidden" value="<%= data.products[i].masp %>" name="masp">
+                            <label for="<%= data.products[i].masp %>">
+                                <span class="setting" style="color: black;">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </span>
+                            </label>
+                            <input type="submit" id="<%= data.products[i].masp %>" value="Xóa" style="display: none;">
+                        </form>                      
+                    </td>
+                </tr>
+            <% } %>
+        <% } else { %>
+            <tr>
+                <td colspan="7" class="text-center">Không có sản phẩm nào!</td>
+            </tr>
+        <% } %>
+    </tbody>
+</table>
+<style>
+    thead th {
+        border-bottom: 2px solid black !important; 
+        text-align: center;
+        padding: 10px; 
+        background-color: #f8f9fa; 
+    }
+    .del {
+        display: inline; 
+    }
+    td img {
+        width: 50px; /* Đặt kích thước hình ảnh */
+        height: 50px;
+    }
+    .table  td {
+        vertical-align: middle;
+    }
+    .table tr {
+        text-align: center;
+    }
+    .table th {
+        vertical-align: middle;
+    }
+</style>

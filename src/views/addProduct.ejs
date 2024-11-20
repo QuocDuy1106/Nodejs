@@ -1,0 +1,27 @@
+<form action="/add-product" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="ten">Tên sản phẩm:</label>
+        <input type="text" id="ten" name="ten" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="gia">Giá sản phẩm:</label>
+        <input type="number" id="gia" name="gia" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="mota">Mô tả sản phẩm:</label>
+        <textarea id="mota" name="mota" class="form-control" required></textarea>
+    </div>
+    <div class="form-group">
+        <label for="hinhanh">Hình ảnh sản phẩm:</label>
+        <input type="file" id="hinhanh" name="hinhanh" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="idnhom">Nhóm sản phẩm:</label>
+        <select id="idnhom" name="idnhom" class="form-control" required>
+            <% for (let i = 0; i < data.nhom.length; i++) { %>
+                <option value="<%= data.nhom[i].idnhom %>"><%= data.nhom[i].tenNhom %></option>
+            <% } %>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Thêm sản phẩm</button>
+</form>
